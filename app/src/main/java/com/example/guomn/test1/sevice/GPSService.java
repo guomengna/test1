@@ -3,11 +3,16 @@ package com.example.guomn.test1.sevice;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
+import com.example.guomn.test1.MainActivity;
+
 /**
  * Created by guomn on 2018/3/23.
  */
@@ -30,7 +35,9 @@ public class GPSService extends Service {
     public void startService() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new GPSServiceListener();
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance,locationListener);
+        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, locationListener);
+        }
     }
 
     public void endService() {

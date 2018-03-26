@@ -50,16 +50,26 @@ public class GPSServiceListener implements LocationListener {
                 strBuffer.append(user);
                 strBuffer.append("&pass=");
                 strBuffer.append(pass);
+                //经度
                 strBuffer.append("&Latitude=");
                 strBuffer.append(location.getLatitude());
+                //纬度
                 strBuffer.append("&Longitude=");
                 strBuffer.append(location.getLongitude());
                 strBuffer.append("&Time=");
                 strBuffer.append(timestampFormat.format(greg.getTime()));
+                //速度
                 strBuffer.append("&Speed=");
                 strBuffer.append(location.hasSpeed());
+                //高度
+                strBuffer.append("&Altitude=");
+                strBuffer.append(location.getAltitude());
+                //方向
+                strBuffer.append("&Bearing=");
+                strBuffer.append(location.getBearing());
                 doGet(strBuffer.toString());
                 Log.v(tag, strBuffer.toString());
+                Log.i("TAG", strBuffer.toString());
             }
         }
     }
