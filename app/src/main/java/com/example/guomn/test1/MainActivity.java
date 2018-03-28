@@ -28,7 +28,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends Activity {
     private LocationManager mLocationManager;//位置管理器
-    private LocationManager locationManager;
+
     private LocationProvider provider;
     private String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
     Location location;
@@ -62,44 +62,30 @@ public class MainActivity extends Activity {
             }
         }, 1000, 5000);
 
-        if(ContextCompat.checkSelfPermission(MainActivity.this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
-            Log.i("TAG","运行定位程序");
-            //获取到位置管理器实例
-            mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-            //获取到GPS_PROVIDER
-            location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//            if (location != null) {
-//                //获取当前位置，这里只用到了经纬度
-//                String string = "纬度为：" + location.getLatitude() + ",经度为："
-//                        + location.getLongitude();
-//                Log.i("TAG", string);
-//            }else{
-//                Log.i("TAG","位置为空");
-//            }
-
-            //侦听位置发生变化，2000毫秒更新一次，位置超过8米也更新一次
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000, 8, locationListener);
-            Timer timer1 = new Timer();
-            timer1.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.print("test");
-                    if (location != null) {
-                        //获取当前位置，这里只用到了经纬度
-                        String string = "纬度为：" + location.getLatitude() + ",经度为："
-                                + location.getLongitude();
-                        Log.i("TAG", string);
-                    }else{
-                        Log.i("TAG","位置为空");
-                    }
-                }
-            }, 1000, 5000);
-            //更新位置信息显示到TextView
-            updata(location);
-        }else {
-            Log.i("TAG","没有运行定位程序，因为API23条件不满足");
-        }
+//        if(ContextCompat.checkSelfPermission(MainActivity.this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
+//            Log.i("TAG","运行定位程序");
+//            //获取到位置管理器实例
+//            mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//
+//            //获取到GPS_PROVIDER
+//            location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+////            if (location != null) {
+////                //获取当前位置，这里只用到了经纬度
+////                String string = "纬度为：" + location.getLatitude() + ",经度为："
+////                        + location.getLongitude();
+////                Log.i("TAG", string);
+////            }else{
+////                Log.i("TAG","位置为空");
+////            }
+//
+//            //侦听位置发生变化，2000毫秒更新一次，位置超过8米也更新一次
+//            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000, 0, locationListener);
+//
+//            //更新位置信息显示到TextView
+//            updata(location);
+//        }else {
+//            Log.i("TAG","没有运行定位程序，因为API23条件不满足");
+//        }
 
 //        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
 //            //获取到位置管理器实例
@@ -211,7 +197,8 @@ public class MainActivity extends Activity {
     public LocationListener locationListener=new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-
+            updata(location);
+            mLocationManager.removeUpdates(locationListener);
         }
 
         @Override
@@ -230,18 +217,18 @@ public class MainActivity extends Activity {
         }
     };
 
-    //关闭时解除监听器
-    @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-        //api23需要这样写
-        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
-            if (mLocationManager != null) {
-                mLocationManager.removeUpdates(locationListener);
-            }
-        }
-    }
+//    //关闭时解除监听器
+//    @Override
+//    protected void onDestroy() {
+//        // TODO Auto-generated method stub
+//        super.onDestroy();
+//        //api23需要这样写
+//        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
+//            if (mLocationManager != null) {
+//                mLocationManager.removeUpdates(locationListener);
+//            }
+//        }
+//    }
 
     /**
      * 返回app运行状态

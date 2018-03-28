@@ -41,6 +41,6 @@ public class BootReceiver extends BroadcastReceiver {
         Intent intent1 = context.getPackageManager().getLaunchIntentForPackage("com.example.guomn.test1");
         context.startActivity(intent1);
 
-
     }
+
 }
