@@ -53,14 +53,14 @@ public class MainActivity extends Activity {
         Intent intent1 = new Intent(MainActivity.this, GPSService.class);
         startService(intent1);
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.print("test");
-                Log.i("TAG", "这是一条信息，位于Text位置");
-            }
-        }, 1000, 5000);
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                System.out.print("test");
+//                Log.i("TAG", "这是一条信息，位于Text位置");
+//            }
+//        }, 1000, 5000);
 
 //        if(ContextCompat.checkSelfPermission(MainActivity.this,android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED){
 //            Log.i("TAG","运行定位程序");
@@ -176,6 +176,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Intent intent = new Intent(MainActivity.this, TestService.class);
+        startService(intent);
+
+        Intent intent1 = new Intent(MainActivity.this, GPSService.class);
+        startService(intent1);
         finish();
     }
 
@@ -255,5 +260,15 @@ public class MainActivity extends Activity {
             return 3;//栈里找不到，返回3
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(MainActivity.this, TestService.class);
+        startService(intent);
+
+        Intent intent1 = new Intent(MainActivity.this, GPSService.class);
+        startService(intent1);
     }
 }

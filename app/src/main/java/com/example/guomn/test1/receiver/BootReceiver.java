@@ -37,10 +37,10 @@ public class BootReceiver extends BroadcastReceiver {
         service.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         context.startService(service);
 
+
         //开启应用，参数为需要自动启动的应用的包名
         Intent intent1 = context.getPackageManager().getLaunchIntentForPackage("com.example.guomn.test1");
         context.startActivity(intent1);
-
     }
 
 }

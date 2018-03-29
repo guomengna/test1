@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.guomn.test1">
-    <!--允许广播权限-->
+    <!--允许广播权限,用于开机自启-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
-    <!--允许获取app运行状态权限-->
-    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <uses-permission android:name="android.intent.action.BOOT_COMPLETED"></uses-permission>
     <!--GPS定位权限-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -52,14 +51,11 @@
             android:exported="true">
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.intent.action.PACKAGE_RESTARTED" />
 
-                <data android:scheme="package" />
-                <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.intent.action.PACKAGE_RESTARTED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.PACKAGE_RESTARTED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
