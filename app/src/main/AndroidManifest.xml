@@ -29,9 +29,11 @@
 
             >
             <!--android:theme="@android:style/Theme.NoDisplay"-->
+            <!--修改为不显示界面会出现服务无法正常返回位置信息的问题-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!--<data android:host="MainActivity" android:scheme="com.example.guomn.test1"/>-->
+                <!--修改为不显示图标应用没有启动入口，不会启动-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
